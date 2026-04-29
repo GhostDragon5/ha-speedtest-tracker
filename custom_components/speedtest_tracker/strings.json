@@ -1,0 +1,32 @@
+{
+  "title": "Speedtest Tracker",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Set up Speedtest Tracker",
+        "description": "Connect Home Assistant to your Speedtest Tracker instance.",
+        "data": {
+          "base_url": "Base URL",
+          "api_token": "API token",
+          "scan_interval": "Polling interval (seconds)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect.",
+      "invalid_auth": "Invalid API token or insufficient permissions.",
+      "invalid_url": "Invalid URL.",
+      "unknown": "Unknown error."
+    },
+    "abort": {
+      "already_configured": "This Speedtest Tracker instance is already configured."
+    }
+  },
+  "entity": {
+    "button": {
+      "run_speedtest": {
+        "name": "Run Speedtest"
+      }
+    }
+  }
+}
