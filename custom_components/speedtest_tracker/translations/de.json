@@ -22,6 +22,17 @@
       "already_configured": "Diese Speedtest-Tracker-Instanz ist bereits eingerichtet."
     }
   },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Speedtest Tracker Optionen",
+        "description": "Abfrageintervall konfigurieren.",
+        "data": {
+          "scan_interval": "Abfrageintervall (Sekunden)"
+        }
+      }
+    }
+  },
   "entity": {
     "button": {
       "run_speedtest": {

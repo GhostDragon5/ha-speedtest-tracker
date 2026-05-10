@@ -17,6 +17,26 @@ from .api import (
 from .const import CONF_API_TOKEN, CONF_BASE_URL, CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL, DOMAIN
 
 
+class SpeedtestTrackerOptionsFlow(config_entries.OptionsFlowWithConfigEntry):
+    async def async_step_init(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
+        if user_input is not None:
+            self.hass.config_entries.async_update_entry(
+                self.config_entry,
+                data={**self.config_entry.data, CONF_SCAN_INTERVAL: user_input[CONF_SCAN_INTERVAL]},
+            )
+            return self.async_create_entry()
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(
+                {
+                    vol.Required(CONF_SCAN_INTERVAL, default=self.config_entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)): vol.All(
+                        vol.Coerce(int), vol.Range(min=60, max=86400)
+                    ),
+                }
+            ),
+        )
+
+
 def _normalize_base_url(value: str) -> str:
     value = value.strip().rstrip("/")
     parsed = urlparse(value)
@@ -27,6 +47,7 @@ def _normalize_base_url(value: str) -> str:
 
 class SpeedtestTrackerConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
+    options = SpeedtestTrackerOptionsFlow
 
     async def async_step_user(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
         errors: dict[str, str] = {}

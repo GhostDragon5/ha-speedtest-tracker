@@ -32,23 +32,6 @@ class SpeedtestTrackerDataUpdateCoordinator(DataUpdateCoordinator[dict[str, Any]
         try:
             latest = await self.api.async_get_latest_result()
             stats = await self.api.async_get_stats()
-
-            return {
-                "latest": latest,
-                "stats": stats,
-            }
-
-        except SpeedtestTrackerApiAuthError as err:
-            raise UpdateFailed(f"Authentication failed: {err}") from err
-        except SpeedtestTrackerApiConnectionError as err:
-            raise UpdateFailed(f"Connection failed: {err}") from err
-        except SpeedtestTrackerApiError as err:
-            raise UpdateFailed(f"API error: {err}") from err
-
-    async def _async_update_data(self) -> dict[str, Any]:
-        try:
-            latest = await self.api.async_get_latest_result()
-            stats = await self.api.async_get_stats()
             alive = await self.api.async_is_alive()
 
             return {

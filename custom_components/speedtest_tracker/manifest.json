@@ -1,7 +1,7 @@
 {
   "domain": "speedtest_tracker",
   "name": "Speedtest Tracker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "config_flow": true,
   "documentation": "https://github.com/GhostDragon5/ha-speedtest-tracker",
   "issue_tracker": "https://github.com/GhostDragon5/ha-speedtest-tracker/issues",

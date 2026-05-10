@@ -11,6 +11,7 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
+from .coordinator import SpeedtestTrackerDataUpdateCoordinator
 
 
 @dataclass(frozen=True, kw_only=True)
@@ -140,7 +141,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry, async_add_e
 class SpeedtestTrackerSensor(CoordinatorEntity, SensorEntity):
     entity_description: SpeedtestTrackerSensorEntityDescription
 
-    def __init__(self, coordinator, entry: ConfigEntry, description: SpeedtestTrackerSensorEntityDescription) -> None:
+    def __init__(self, coordinator: SpeedtestTrackerDataUpdateCoordinator, entry: ConfigEntry, description: SpeedtestTrackerSensorEntityDescription) -> None:
         super().__init__(coordinator)
         self.entity_description = description
         self._attr_has_entity_name = True

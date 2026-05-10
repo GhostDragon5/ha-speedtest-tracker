@@ -7,6 +7,8 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import DOMAIN
+from .coordinator import SpeedtestTrackerDataUpdateCoordinator
+from .api import SpeedtestTrackerApiClient
 
 
 async def async_setup_entry(
@@ -20,7 +22,7 @@ async def async_setup_entry(
 
 
 class SpeedtestTrackerRunButton(CoordinatorEntity, ButtonEntity):
-    def __init__(self, coordinator, api, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator: SpeedtestTrackerDataUpdateCoordinator, api: SpeedtestTrackerApiClient, entry: ConfigEntry) -> None:
         super().__init__(coordinator)
         self._api = api
         self._attr_has_entity_name = True
